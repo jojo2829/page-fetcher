@@ -7,6 +7,10 @@ const download = (url, dest, cb) => {
     if (error) {
       console.log('request err: ',error);
     }
+    if (response.statusCode !== 200) {
+      console.log(`Status Code ${response.statusCode} when fetching. Response: ${body}`);
+      return;
+    }
     cb(dest, body);
   })
 };
@@ -23,7 +27,4 @@ function writeToLocal(dest, body) {
 }
 
 
-
-
-
-download(args[0], args[1], writeToLocal);
+download(args[0], args[1], writeToLocal); 
